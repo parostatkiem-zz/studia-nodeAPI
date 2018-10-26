@@ -2,6 +2,16 @@ import express from 'express';
 import cars from './data/cars';
 // Set up the express app
 const app = express();
+const cors = require('cors');
+app.use(
+  cors({
+    allowedHeaders: ['Content-Type'],
+
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+  }),
+);
 // get all todos
 app.get('/api/cars', (req, res) => {
   res.status(200).send({

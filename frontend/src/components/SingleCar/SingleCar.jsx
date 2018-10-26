@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SingleCar = carToDisplay => (
+const SingleCar = ({ carToDisplay }) => (
   <div className="single-car">
     <span>{carToDisplay.brand}</span>
     <span>{carToDisplay.model}</span>
