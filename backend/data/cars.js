@@ -9,6 +9,16 @@ const cars = [
     brand: 'BMW',
     model: '2002tii',
   },
+  {
+    id: 3,
+    brand: 'Fiat',
+    model: 'Panda',
+  },
+  {
+    id: 4,
+    brand: 'Hyundai',
+    model: 'Pony',
+  },
 ];
 
 export default cars;

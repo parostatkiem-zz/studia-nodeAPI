@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import './App.scss';
 
 import CarList from './components/CarList/CarList';
+import AddCarForm from './components/AddCarForm/AddCarForm';
 
 class App extends Component {
   state = {
@@ -9,10 +11,16 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <p>Ale mamy piękne autka</p>
-        </header>
-        <CarList cars={this.state.cars} />
+        <button className="main-action-button" onClick={() => this.fetchCars()}>
+          Odświez listę samochodów
+        </button>
+
+        <section>
+          <CarList cars={this.state.cars} />
+        </section>
+        <section>
+          <AddCarForm className="section" />
+        </section>
       </div>
     );
   }

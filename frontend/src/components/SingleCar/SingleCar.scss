@@ -1,0 +1,16 @@
+.single-car {
+  padding: 0.3rem;
+  display: grid;
+  grid-template-columns: 1fr 6fr 6fr 1fr;
+  grid-gap: 0.3rem;
+  &:not(:last-of-type) {
+    border-bottom: 1px solid #333;
+    margin-bottom: 0.5rem;
+  }
+  .small {
+    font-size: 50%;
+  }
+  button {
+    font-size: 60%;
+  }
+}
