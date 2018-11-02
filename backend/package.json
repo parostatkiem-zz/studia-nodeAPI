@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "start": "node_modules/.bin/babel-node index.js"
+    "start": "nodemon --exec babel-node --presets env index.js"
   },
   "author": "",
   "license": "ISC",
@@ -15,5 +15,9 @@
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
     "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.7.0",
+    "nodemon": "^1.18.5"
   }
 }

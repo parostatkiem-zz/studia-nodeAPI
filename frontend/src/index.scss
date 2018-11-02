@@ -1,3 +1,4 @@
+@import 'variables';
 body {
   margin: 0;
   padding: 0;
@@ -8,6 +9,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   display: flex;
   justify-content: center;
+  background-color: $color_background;
+  background-blend-mode: hard-light;
 }
 
 code {

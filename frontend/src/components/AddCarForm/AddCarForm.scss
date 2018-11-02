@@ -1,5 +1,22 @@
+@import '../../variables';
 .add-car-form {
-  input {
-    margin-right: 0.35rem;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 2fr 4rem;
+  grid-gap: 0.3rem;
+  max-width: 100%;
+  text-align: right;
+
+  input[type='text'] {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 100%;
+    border: 0;
+    background-color: lighten($color_background, 10%);
+    color: white;
+    font-size: 100%;
+    padding: 0.3rem;
+  }
+  label {
+    line-height: 2;
   }
 }
