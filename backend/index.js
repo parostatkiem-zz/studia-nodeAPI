@@ -51,25 +51,6 @@ app.post('/api/car', (req, res) => {
   });
 });
 
-// delete single car
-app.delete('/api/car/:id', (req, res) => {
-  const id = req.params.id;
-  const cars_new = cars_array.filter(car => car.id != id);
-
-  if (cars_new.length === cars_array.length) {
-    res.status(409).send({
-      success: 'false',
-      message: 'Could not remove car with given id',
-    });
-    return;
-  }
-  cars_array = [...cars_new];
-  res.status(200).send({
-    success: 'true',
-    message: 'car removed',
-  });
-});
-
 const PORT = 5000;
 
 app.listen(PORT, () => {
