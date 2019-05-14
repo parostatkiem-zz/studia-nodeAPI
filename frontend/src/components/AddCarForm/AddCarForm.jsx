@@ -1,18 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './AddCarForm.scss';
 
-const AddCarForm = ({ carToDisplay }) => {
+const AddCarForm = () => {
+  const [form, setValues] = useState({
+    brand: '',
+    model: '',
+  });
+
+  const SubmitForm = () => {
+    fetch('http://localhost:5000/api/car', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(form),
+    });
+  };
+  const updateField = e => {
+    setValues({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   return (
-    <form
-      action="http://localhost:5000/api/car"
-      method="POST"
-      className="add-car-form"
-    >
+    <form className="add-car-form" onSubmit={() => SubmitForm()}>
       <label htmlFor="brand">Marka:</label>
-      <input name="brand" type="text" />
+      <input onChange={updateField} name="brand" type="text" />
 
       <label htmlFor="model">Model:</label>
-      <input name="model" type="text" />
+      <input onChange={updateField} name="model" type="text" />
 
       <input className="button" type="submit" value="Dodaj" />
     </form>
