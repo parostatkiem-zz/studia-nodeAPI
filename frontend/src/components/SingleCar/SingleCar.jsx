@@ -1,15 +1,15 @@
-import React from 'react';
-import './SingleCar.scss';
+import React from "react";
+import "./SingleCar.scss";
 
-const SingleCar = ({ carToDisplay }) => {
+const SingleCar = ({ carToDisplay, onCarRemoved }) => {
   const deleteCar = id => {
-    fetch('http://localhost:5000/api/car/' + id, {
-      method: 'DELETE',
+    fetch("http://localhost:5000/api/car/" + id, {
+      method: "DELETE"
     })
-      .then(response => response.json())
-
+      .then(() => onCarRemoved())
       .catch(error => console.error(error));
   };
+
   return (
     <div className="single-car">
       <span className="small">

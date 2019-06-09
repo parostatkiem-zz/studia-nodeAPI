@@ -1,40 +1,49 @@
-import React, { Component } from 'react';
-import './App.scss';
+import React, { Component } from "react";
+import "./App.scss";
 
-import CarList from './components/CarList/CarList';
-import AddCarForm from './components/AddCarForm/AddCarForm';
+import CarList from "./components/CarList/CarList";
+import AddCarForm from "./components/AddCarForm/AddCarForm";
 
 class App extends Component {
   state = {
-    cars: [],
+    cars: []
   };
-  render() {
-    return (
-      <div className="App">
-        <button className="main-action-button" onClick={() => this.fetchCars()}>
-          Odświez listę samochodów
-        </button>
 
-        <section>
-          <CarList cars={this.state.cars} />
-        </section>
-        <section>
-          <AddCarForm className="section" />
-        </section>
-      </div>
-    );
-  }
+  fetchCars = async () =>
+    await fetch("http://localhost:5000/api/cars", {
+      method: "GET"
+    })
+      .then(response => response.json())
+      .then(carList => {
+        this.setState({ cars: carList.cars });
+      })
+      .catch(error => console.error(error));
+
   componentDidMount() {
     this.fetchCars();
   }
 
-  fetchCars() {
-    fetch('http://localhost:5000/api/cars', {
-      method: 'GET',
-    })
-      .then(response => response.json())
-      .then(data => this.setState({ cars: data.cars }))
-      .catch(error => console.error(error));
+  render() {
+    return (
+      <div className="App">
+        <section>
+          <CarList
+            cars={this.state.cars}
+            onCarRemoved={() => {
+              this.fetchCars();
+            }}
+          />
+        </section>
+        <section>
+          <AddCarForm
+            onCarAdded={() => {
+              this.fetchCars();
+            }}
+            className="section"
+          />
+        </section>
+      </div>
+    );
   }
 }
 

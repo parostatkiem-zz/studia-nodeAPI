@@ -1,13 +1,29 @@
-import React from 'react';
-import './AddCarForm.scss';
+import React from "react";
+import "./AddCarForm.scss";
 
-const AddCarForm = ({ carToDisplay }) => {
+export const AddCarForm = ({ onCarAdded }) => {
+  const SubmitForm = event => {
+    const formData = new FormData(event.target);
+
+    fetch("http://localhost:5000/api/car", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      },
+      body: JSON.stringify(Object.fromEntries(formData))
+    }).then(() => {
+      if (typeof onCarAdded === "function") {
+        onCarAdded();
+      }
+    });
+    event.target.reset(); //reset form
+    event.preventDefault();
+  };
+
   return (
-    <form
-      action="http://localhost:5000/api/car"
-      method="POST"
-      className="add-car-form"
-    >
+    <form className="add-car-form" onSubmit={SubmitForm}>
       <label htmlFor="brand">Marka:</label>
       <input name="brand" type="text" />
 
