@@ -3,14 +3,42 @@
   display: grid;
   grid-template-columns: 1fr 6fr 6fr 1fr;
   grid-gap: 0.3rem;
+  line-height: 1.7;
+
+  span {
+    word-break: break-word;
+  }
+
+  &.frozen {
+    filter: blur(2px);
+    opacity: 0.5;
+    transition: 0.5s;
+  }
+
   &:not(:last-of-type) {
     border-bottom: 1px solid #333;
     margin-bottom: 0.5rem;
   }
+
   .small {
     font-size: 50%;
   }
+
   button {
     font-size: 60%;
+  }
+
+  .editable {
+    background: #8283c9;
+    animation: editable-text-blink 1s infinite step-end;
+  }
+}
+
+@keyframes editable-text-blink {
+  from {
+    color: white;
+  }
+  50% {
+    color: lighten($color: #8283c9, $amount: 15);
   }
 }

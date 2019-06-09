@@ -69,6 +69,32 @@ app.delete("/api/car/:id", (req, res) => {
   });
 });
 
+// edit single car
+app.post("/api/car/:id", async (req, res) => {
+  const id = req.params.id;
+  const editedCarIndex = cars_array.findIndex(car => car.id == id);
+  const { brand, model } = req.body;
+
+  //simulate some operations
+  await new Promise(res => setTimeout(res, 1000));
+
+  if (editedCarIndex < 0) {
+    res.status(409).send({
+      success: "false",
+      message: "Could not find car with given id"
+    });
+    return;
+  }
+
+  cars_array[editedCarIndex].brand = brand;
+  cars_array[editedCarIndex].model = model;
+
+  res.status(200).send({
+    success: "true",
+    message: "car edited"
+  });
+});
+
 const PORT = 5000;
 
 app.listen(PORT, () => {
