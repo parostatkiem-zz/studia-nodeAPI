@@ -1,36 +1,34 @@
-import React, { useState } from 'react';
-import './AddCarForm.scss';
+import React from "react";
+import "./AddCarForm.scss";
 
-const AddCarForm = () => {
-  const [form, setValues] = useState({
-    brand: '',
-    model: '',
-  });
+export const AddCarForm = ({ onCarAdded }) => {
+  const SubmitForm = event => {
+    const formData = new FormData(event.target);
 
-  const SubmitForm = () => {
-    fetch('http://localhost:5000/api/car', {
-      method: 'POST',
+    fetch("http://localhost:5000/api/car", {
+      method: "POST",
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
       },
-      body: JSON.stringify(form),
+      body: JSON.stringify(Object.fromEntries(formData))
+    }).then(() => {
+      if (typeof onCarAdded === "function") {
+        onCarAdded();
+      }
     });
-  };
-  const updateField = e => {
-    setValues({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
+    event.target.reset(); //reset form
+    event.preventDefault();
   };
 
   return (
-    <form className="add-car-form" onSubmit={() => SubmitForm()}>
+    <form className="add-car-form" onSubmit={SubmitForm}>
       <label htmlFor="brand">Marka:</label>
-      <input onChange={updateField} name="brand" type="text" />
+      <input name="brand" type="text" />
 
       <label htmlFor="model">Model:</label>
-      <input onChange={updateField} name="model" type="text" />
+      <input name="model" type="text" />
 
       <input className="button" type="submit" value="Dodaj" />
     </form>

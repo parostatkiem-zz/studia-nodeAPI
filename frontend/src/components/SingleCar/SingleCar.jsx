@@ -1,17 +1,15 @@
-import React, { useContext } from 'react';
-import './SingleCar.scss';
-import { EventContext } from '../../App';
+import React from "react";
+import "./SingleCar.scss";
 
-const SingleCar = ({ carToDisplay }) => {
+const SingleCar = ({ carToDisplay, onCarRemoved }) => {
   const deleteCar = id => {
-    fetch('http://localhost:5000/api/car/' + id, {
-      method: 'DELETE',
+    fetch("http://localhost:5000/api/car/" + id, {
+      method: "DELETE"
     })
-      .then(() => fetchCars())
+      .then(() => onCarRemoved())
       .catch(error => console.error(error));
   };
-  const fetchCars = useContext(EventContext);
-  console.log(fetchCars);
+
   return (
     <div className="single-car">
       <span className="small">
