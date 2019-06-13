@@ -27,6 +27,9 @@ class App extends Component {
     return (
       <div className="App">
         <section>
+          <h1>Lista samochodów</h1>
+        </section>
+        <section>
           <CarList
             cars={this.state.cars}
             onCarRemoved={() => {
